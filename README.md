@@ -10,11 +10,11 @@ This example uses the [Connexion](https://github.com/zalando/connexion) library 
 * [Swagger-codegen](https://github.com/swagger-api/swagger-codegen#prerequisites)
 
 ## Usage
-1. Copy and paste the repository into a new folder with the correct name.
-2. Update the API spec in `./api`
+1. Copy and paste the repository into a new folder with the project name. For example, in `./app-inventory`.
+2. Update the API spec in `./app-inventory/api`
 3. Run the following:
 ```
-java -jar [ directory to swagger-codegen-cli.jar] generate -i ./[project name]]/api/[api spec] -l python-flask -c ./[project name]/api/config.json -o ./[project name]
+java -jar [directory to swagger-codegen-cli.jar] generate -i ./[project name]]/api/[api spec] -l python-flask -c ./[project name]/api/config.json -o ./[project name]
 ```
 Example:
 ```
