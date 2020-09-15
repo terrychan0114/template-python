@@ -1,23 +1,23 @@
 openapi: 3.0.0
 info:
   description: |
-    This is the inventory microservice.
+    This is the API for the template microservice.
   version: "1.0.0"
-  title: Inventory Microservice
+  title: Template Microservice
   contact:
     email: terry.chan@hohokusinc.com
     
 tags:
-  - name: inventory
-    description: Everything about inventory
+  - name: template
+    description: Everything in template
 
 paths:
-  /inventory:
+  /information:
     get:
       tags:
-        - inventory
-      summary: Get the information of all inventory
-      operationId: getINV
+        - template
+      summary: Get the information
+      operationId: getInfo
       responses:
         '200':
           description: Ok
@@ -26,42 +26,43 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/inventoryInfo'
+                  $ref: '#/components/schemas/templateInfo'
         '404':
           description: Item not found
+          
     post:
       tags:
-        - inventory
-      summary: Add a new work order to the server
-      operationId: addPN
+        - template
+      summary: Add a new info to the server
+      operationId: addInfo
       responses:
         '200':
           description: Ok
         '405':
           description: Invalid input
       requestBody:
-        $ref: '#/components/requestBodies/inventoryInfo'
+        $ref: '#/components/requestBodies/templateInfo'
     put:
       tags:
-        - inventory
-      summary: Update a part number
-      operationId: updatePN
+        - template
+      summary: Update info
+      operationId: updateInfo
       responses:
         '200':
           description: Ok
         '405':
           description: Invalid input
       requestBody:
-        $ref: '#/components/requestBodies/inventoryInfo'      
+        $ref: '#/components/requestBodies/templateInfo'      
 
-  /inventory/part-number:
+  /information/number:
     get:
       tags:
-        - inventory
-      summary: Get the information of a part number
-      operationId: getPN
+        - template
+      summary: Get the information of a number
+      operationId: getNum
       parameters:
-        - name: part_number
+        - name: number
           in: query
           required: true
           description: This is the input
@@ -75,76 +76,31 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/inventoryInfo'
-        '404':
-          description: Item not found
-        
-  /inventory/lot-number:
-    get:
-      tags:
-        - inventory
-      summary: Get the information of a lot number
-      operationId: getLN
-      parameters:
-        - name: lot_number
-          in: query
-          required: true
-          description: This is the input for getting lot number
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Ok
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/inventoryInfo'
+                  $ref: '#/components/schemas/templateInfo'
         '404':
           description: Item not found
 
 components:
   schemas:
-    inventoryInfo:
+    templateInfo:
       type: object
       required:
-        - part_number
+        - number
       properties:
-        part_number:
+        number:
           type: string
-          example: 18300
-        lot_number:
-          type: string
-          example: R1000
-        quantity:
-          type: integer
-          example: 2000
-        last_updated:
+          example: 1
+        date:
           type: string
           example: 7/16/2020 16:38
-        location:
+        message:
           type: string
-          example: 4A
-        description:
-          type: string
-          example: Screws
-        status:
-          type: string
-          example: Arrived here
-        lead_time:
-          type: string
-          example: 12 weeks
-        outside_process:
-          type: string
-          example: None
-        remarks:
-          type: string
-          example: Missing
+          example: Hi there
 
   requestBodies:
-    inventoryInfo:
+    templateInfo:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/inventoryInfo'
-      description: Pet object that needs to be added to the store
+            $ref: '#/components/schemas/templateInfo'
       required: true
