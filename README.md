@@ -12,13 +12,17 @@ This example uses the [Connexion](https://github.com/zalando/connexion) library 
 ## Usage
 1. Copy and paste the repository into a new folder with the project name. For example, in `./app-inventory`.
 2. Update the API spec in `./app-inventory/api`
-3. Run the following:
+3. Run the following lines:
 ```
-java -jar [directory to swagger-codegen-cli.jar] generate -i ./[project name]]/api/[api spec] -l python-flask -c ./[project name]/api/config.json -o ./[project name]
+>> java -jar [directory to swagger-codegen-cli.jar] generate -i ./[project name]]/api/[api spec] -l python-flask -c ./[project name]/api/config.json -o ./[project name] -Dmodels
+
+>> java -jar [directory to swagger-codegen-cli.jar] generate -i ./[project name]]/api/[api spec] -l python-flask -c ./[project name]/api/config.json -o ./[project name] -Dapis
 ```
 Example:
 ```
-java -jar ./swagger-codegen-cli.jar generate -i ./app-inventory/api/v1.0.0.yaml -l python-flask -c ./app-inventory/api/config.json -o ./app-inventory
+>> java -jar ./swagger-codegen-cli.jar generate -i ./app-inventory/api/v1.0.0.yaml -l python-flask -c ./app-inventory/api/config.json -o ./app-inventory -Dmodels
+
+>> java -jar ./swagger-codegen-cli.jar generate -i ./app-inventory/api/v1.0.0.yaml -l python-flask -c ./app-inventory/api/config.json -o ./app-inventory -Dapis
 
 ```
 

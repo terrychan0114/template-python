@@ -1,0 +1,115 @@
+openapi: 3.0.0
+info:
+  title: Template Microservice
+  description: |
+    This is the API for the template microservice.
+  contact:
+    email: terry.chan@hohokusinc.com
+  version: 1.0.0
+servers:
+- url: /
+tags:
+- name: template
+  description: Everything in template
+paths:
+  /information:
+    get:
+      tags:
+      - template
+      summary: Get the information
+      operationId: get_info
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/templateInfo'
+                x-content-type: application/json
+        "404":
+          description: Item not found
+      x-openapi-router-controller: server.controllers.template_controller
+    put:
+      tags:
+      - template
+      summary: Update info
+      operationId: update_info
+      requestBody:
+        $ref: '#/components/requestBodies/templateInfo'
+      responses:
+        "200":
+          description: Ok
+        "405":
+          description: Invalid input
+      x-openapi-router-controller: server.controllers.template_controller
+    post:
+      tags:
+      - template
+      summary: Add a new info to the server
+      operationId: add_info
+      requestBody:
+        $ref: '#/components/requestBodies/templateInfo'
+      responses:
+        "200":
+          description: Ok
+        "405":
+          description: Invalid input
+      x-openapi-router-controller: server.controllers.template_controller
+  /information/number:
+    get:
+      tags:
+      - template
+      summary: Get the information of a number
+      operationId: get_num
+      parameters:
+      - name: number
+        in: query
+        description: This is the input
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/templateInfo'
+                x-content-type: application/json
+        "404":
+          description: Item not found
+      x-openapi-router-controller: server.controllers.template_controller
+components:
+  schemas:
+    templateInfo:
+      required:
+      - number
+      type: object
+      properties:
+        number:
+          type: string
+          example: "1"
+        date:
+          type: string
+          example: 7/16/2020 16:38
+        message:
+          type: string
+          example: Hi there
+      example:
+        date: 7/16/2020 16:38
+        number: "1"
+        message: Hi there
+  requestBodies:
+    templateInfo:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/templateInfo'
+      required: true
+
